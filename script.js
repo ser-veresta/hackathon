@@ -13,6 +13,8 @@ const subscribersContainer = document.getElementById('subscribers-container');
 const activitiesContainer = document.getElementById('activities-container');
 const channelData = document.getElementById('channel-data');
 
+let channel;
+
 //form submit & change channel 
 // channelForm.addEventListener('submit', e => {
 //     e.preventDefault();
@@ -35,6 +37,7 @@ function initClient(){
         scope: SCOPE 
     })
     .then(()=> {
+        gapi.auth2.getAuthInstance().signOut();
         // Listen for signin state changes
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
         // Handle initial signin state
@@ -50,8 +53,10 @@ function updateSigninStatus(isSignedIn){
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
         content.style.display = 'block';
-        uploadedVideoContainer.style.display = 'block';
-        sysGeneratedPlaylistContainer.style.display = 'block';
+        // uploadedVideoContainer.style.display = 'block';
+        // sysGeneratedPlaylistContainer.style.display = 'block';
+        // subscribersContainer.style.display = 'block';
+        // activitiesContainer.style.display = 'block';
         getChannel();
     }
     else{
@@ -60,6 +65,8 @@ function updateSigninStatus(isSignedIn){
         content.style.display = 'none';
         uploadedVideoContainer.style.display = 'none'; 
         sysGeneratedPlaylistContainer.style.display = 'none';
+        subscribersContainer.style.display = 'none';
+        activitiesContainer.style.display = 'none';
     }
 }
 
@@ -89,7 +96,7 @@ function getChannel(){
     gapi.client.youtube.channels.list(params)
     .then(res => {
         console.log(res);
-        const channel = res.result.items[0];
+        channel = res.result.items[0];
 
         const output = `
             <ul class="collection">
@@ -104,21 +111,32 @@ function getChannel(){
             <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">
                 Visit Channel
             </a>
-            <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
+            <button class="btn grey darken-2" type="button" id="subscribe-btn" onclick="functionality()">Subscriptions</button> 
         `;
         showChannelInfo(output);
 
-        const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
-        requestUploadVideoplaylist(uploadPlaylistId);
+        // const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
+        // requestUploadVideoplaylist(uploadPlaylistId);
 
-        const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
-        createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
+        // const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
+        // createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
 
-        subscriptions();
+        // subscriptions();
 
-        activities();
+        // activities();
     })
     .catch(err => alert('No Channel By That Name'));
+}
+
+function functionality(){
+    switch(this.id){
+        case "subscribe-btn":   subscriptions();
+                                uploadedVideoContainer.style.display = 'none'; 
+                                sysGeneratedPlaylistContainer.style.display = 'none';
+                                subscribersContainer.style.display = 'block';
+                                activitiesContainer.style.display = 'none';
+                                break;
+    }
 }
 
 // To show the uploaded videos in the channel 
