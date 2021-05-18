@@ -12,13 +12,13 @@ const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-pla
 const channelData = document.getElementById('channel-data');
 
 //form submit & change channel 
-channelForm.addEventListener('submit', e => {
-    e.preventDefault();
+// channelForm.addEventListener('submit', e => {
+//     e.preventDefault();
 
-    let channel = channelInput.value;
+//     let channel = channelInput.value;
 
-    getChannel(channel);
-})
+//     getChannel(channel);
+// })
 
 // Load the auth2 library
 function handleClientLoad(){
@@ -81,7 +81,7 @@ function getChannel(){
     let params = {
         part: 'snippet,contentDetails,statistics',
         mine: true
-    };
+    }; 
 
     gapi.client.youtube.channels.list(params)
     .then(res => {
@@ -110,7 +110,7 @@ function getChannel(){
         const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
         createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
     })
-    .catch(err => alert('No Channel By That Name' + err));
+    .catch(err => alert('No Channel By That Name'));
 }
 
 // To show the uploaded videos in the channel 
@@ -155,7 +155,7 @@ function createdPlaylist(sysGeneratedPlaylist){
 
         //loop through videos
         sysGeneratedPlaylist.forEach(item => {
-            console.log(items);
+            console.log(item)
             output += `
                 <div class="col s3">
                     <iframe width="100%" height="auto" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
