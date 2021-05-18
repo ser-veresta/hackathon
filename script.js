@@ -9,6 +9,7 @@ const channelForm = document.getElementById('channel-form');
 const channelInput = document.getElementById('channel-input');
 const uploadedVideoContainer = document.getElementById('uploaded-video-container');
 const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-playlist-container');
+const subscribersContainer = document.getElementById('subscribers-container');
 const channelData = document.getElementById('channel-data');
 
 //form submit & change channel 
@@ -180,7 +181,7 @@ function createdPlaylist(sysGeneratedPlaylist){
 //topo diplay the subscriptions 
 function subscriptions(){
     const requestOptions = {
-        part: ['snippet,subscriberSnippet'],
+        part: 'snippet',
         mine: true,
         maxResults: 20
     }
@@ -188,15 +189,18 @@ function subscriptions(){
     const request = gapi.client.youtube.subscriptions.list(requestOptions);
 
     request.execute(res => {
-        console.log(res)
-        // const items = res.items;
+        const items = res.items;
 
-        // let output = '<h4 class="center-align">System Generated Playlists</h4>';
+        let output = '<h4 class="center-align">System Generated Playlists</h4>';
 
-        // output += '<ul class="collection">';
+        output += '<ul class="collection">';
 
-        // items.forEach(item => {
-        //     output += `<li class="collection-item">${item.snippet.title} </li>`
-        // });
+        items.forEach(item => {
+            output += `<li class="collection-item">${item.snippet.title} </li>`
+        });
+
+        output += '</ul>';
+
+        subscribersContainer.innerHTML = output;
     });
 }
