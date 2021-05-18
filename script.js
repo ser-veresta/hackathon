@@ -180,7 +180,7 @@ function createdPlaylist(sysGeneratedPlaylist){
 //topo diplay the subscriptions 
 function subscriptions(){
     const requestOptions = {
-        part: 'snippet,subscriberSnippet',
+        part: ['snippet,subscriberSnippet'],
         mine: true,
         maxResults: 20
     }
