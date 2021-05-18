@@ -25,26 +25,8 @@ searchForm.addEventListener('submit', e => {
 
     let search = searchInput.value;
 
-    function loadClient() {
-        gapi.client.setApiKey(API_KEY);
-        return gapi.client.load("https://kgsearch.googleapis.com/$discovery/rest?version=v1")
-            .then(function() { console.log("GAPI client loaded for API"); },
-                  function(err) { console.error("Error loading GAPI client for API", err); });
-    }
-    
-    function execute() {
-        return gapi.client.kgsearch.entities.search({
-          "query": search
-        })
-            .then(function(response) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-                  },
-                  function(err) { console.error("Execute error", err); });
-      }
-      gapi.load("client");
-      loadClient();
-      execute();
+    fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${search}&key=${API_KEY}&limit=1&indent=True`)
+        .then(res => console.log(res));
 })
 
 // Load the auth2 library
