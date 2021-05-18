@@ -167,7 +167,7 @@ function createdPlaylist(sysGeneratedPlaylist){
         sysGeneratedPlaylist.forEach(item => {
             output += `
                 <div class="col s3">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                     </iframe>
                 </div>
             `;
