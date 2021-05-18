@@ -324,6 +324,7 @@ function createPlaylist(){
         const request = gapi.client.youtube.playlists.insert(requestOptions);
 
         request.execute(res => {
+            console.log(res);
             playlistId = res.id;
         })
 
