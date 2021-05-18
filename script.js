@@ -187,7 +187,7 @@ function subscriptions(){
         part: 'snippet',
         mine: true,
         maxResults: 20
-    }
+    };
 
     const request = gapi.client.youtube.subscriptions.list(requestOptions);
 
@@ -214,7 +214,7 @@ function activities(){
         part: 'snippet',
         mine: true,
         maxResults: 20
-    }
+    };
 
     const request = gapi.client.youtube.activities.list(requestOptions);
 
