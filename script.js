@@ -232,7 +232,8 @@ function createdPlaylist(sysGeneratedPlaylist){
 function subscriptions(){
     const requestOptions = {
         part: 'snippet',
-        mine: true,
+        // mine: true,
+        channelId: channel.id,
         maxResults: 20
     };
 
@@ -259,7 +260,8 @@ function subscriptions(){
 function activities(){
     const requestOptions = {
         part: 'snippet',
-        mine: true,
+        // mine: true,
+        channelId: channel.id,
         maxResults: 20
     };
 
