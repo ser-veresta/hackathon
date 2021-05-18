@@ -112,11 +112,15 @@ function getChannel(){
             </a>
             <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
             <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
+            <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
+            <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
         `;
         showChannelInfo(output);
 
         document.getElementById('subscribe-btn').onclick = functionality;
         document.getElementById('activitie-btn').onclick = functionality;
+        document.getElementById('uploaded-video-btn').onclick = functionality;
+        document.getElementById('sys-generated-playlist-btn').onclick = functionality;
 
         // const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
         // requestUploadVideoplaylist(uploadPlaylistId);
@@ -131,6 +135,21 @@ function getChannel(){
 
 function functionality(){
     switch(this.id){
+        case "uploaded-video-btn":  requestUploadVideoplaylist(channel.contentDetails.relatedPlaylists.uploads);
+                                    uploadedVideoContainer.style.display = 'none'; 
+                                    sysGeneratedPlaylistContainer.style.display = 'none';
+                                    subscribersContainer.style.display = 'none';
+                                    activitiesContainer.style.display = 'block';
+                                    break;
+        
+        case "sys-generated-playlist-bt":   const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
+                                            createdPlaylist([syGeneratedPlaylist.favorites,syGeneratedPlaylist.likes]);
+                                            uploadedVideoContainer.style.display = 'none'; 
+                                            sysGeneratedPlaylistContainer.style.display = 'none';
+                                            subscribersContainer.style.display = 'none';
+                                            activitiesContainer.style.display = 'block';
+                                            break;
+
         case "activitie-btn":   activities();
                                 uploadedVideoContainer.style.display = 'none'; 
                                 sysGeneratedPlaylistContainer.style.display = 'none';
@@ -203,6 +222,9 @@ function createdPlaylist(sysGeneratedPlaylist){
 
     if(!flag){
         sysGeneratedPlaylistContainer.style.display = 'none';
+    }
+    else{
+        sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlist';
     }
 
     sysGeneratedPlaylistContainer.innerHTML = output;
