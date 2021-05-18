@@ -10,13 +10,11 @@ const channelInput = document.getElementById('channel-input');
 const videoContainer = document.getElementById('video-container');
 const channelData = document.getElementById('channel-data');
 
-const defaultChannel = 'GoogleDevelopers';
-
 //form submit & change channel 
 channelForm.addEventListener('submit', e => {
     e.preventDefault();
 
-    const channel = channelInput.value;
+    let channel = channelInput.value;
 
     getChannel(channel);
 })
@@ -50,7 +48,7 @@ function updateSigninStatus(isSignedIn){
         signoutButton.style.display = 'block';
         content.style.display = 'block';
         videoContainer.style.display = 'block';
-        getChannel(defaultChannel);
+        getChannel();
     }
     else{
         authorizeButton.style.display = 'block';
@@ -76,11 +74,23 @@ function showChannelInfo(data){
 }
 
 // Get channel from api 
-function getChannel(channel){
-    gapi.client.youtube.channels.list({
-        part: 'snippet,contentDetails,statistics',
-        forUsername: channel
-    })
+function getChannel(channel = undefined){
+    let params;
+
+    if(channel){
+        params = {
+            part: 'snippet,contentDetails,statistics',
+            forUsername: channel
+        }; 
+    }
+    else{
+        params = {
+            part: 'snippet,contentDetails,statistics',
+            mine: true
+        }; 
+    }
+
+    gapi.client.youtube.channels.list(params)
     .then(res => {
         console.log(res);
         const channel = res.result.items[0];
