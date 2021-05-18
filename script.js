@@ -235,6 +235,6 @@ function activities(){
 
         output += '</ul>';
 
-        subscribersContainer.innerHTML = output;
+        activitiesContainer.innerHTML = output;
     });
 }
