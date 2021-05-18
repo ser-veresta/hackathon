@@ -88,8 +88,8 @@ function showChannelInfo(data){
 function getChannel(){
     let params = {
         part: 'snippet,contentDetails,statistics',
-        // mine: true
-        forUsername: 'GoogleDevelopers'
+        mine: true
+        // forUsername: 'GoogleDevelopers'
     }; 
 
     gapi.client.youtube.channels.list(params)
@@ -254,7 +254,6 @@ function subscriptions(){
 
         subscribersContainer.innerHTML = output;
     })
-    .catch(err => subscribersContainer.innerHTML = err);
 }
 
 // To display the activities
