@@ -15,7 +15,6 @@ const createPlaylistContainer = document.getElementById('create-playlist-contain
 const channelData = document.getElementById('channel-data');
 
 let channel;
-let playlistId;
 
 //form submit 
 // channelForm.addEventListener('submit', e => {
@@ -295,6 +294,7 @@ function createPlaylist(){
         <input type="text" placeholder="Enter Playlist Title" id="playlist-title">
         <input type="text" placeholder="Enter Playlist Description" id="playlist-description">
         <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status">
+        <input type="text" id="playlist-id" readonly>
         <button class="btn grey darken-2" type="button" id="create-playlist">Create Playlist</button> 
     `;
 
@@ -303,6 +303,7 @@ function createPlaylist(){
     let playlistTitle = document.getElementById('playlist-title');
     let playlistDescription = document.getElementById('playlist-description');
     let playlistStatus = document.getElementById('playlist-status');
+    let playlistId = document.getElementById('playlist-id');
 
     document.getElementById('create-playlist').onclick = create;
 
@@ -325,7 +326,7 @@ function createPlaylist(){
 
         request.execute(res => {
             console.log(res);
-            playlistId = res.id;
+            playlistId.value = res.id;
         })
 
         playlistStatus.value = '';
