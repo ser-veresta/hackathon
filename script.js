@@ -289,23 +289,46 @@ function activities(){
 }
 
 function createPlaylist(){
-    const requestOptions = {
-        part: ['snippet,status'],
-        resource: {
-            snippet: {
-                title: 'Sample playlist created via API',
-                description: 'This is a sample playlist description.',
-                defaultLanguage: 'en'
-            },
-            status: {
-                privacyStatus: 'private'
+    let output = `
+        <h4 class="center-align">Create Playlist</h4>
+        <input type="text" placeholder="Enter Playlist Title" id="playlist-title">
+        <input type="text" placeholder="Enter Playlist Description" id="playlist-description">
+        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status">
+        <button class="btn grey darken-2" type="button" id="create-playlist">Create Playlist</button> 
+    `;
+
+    createPlaylistContainer.innerHTML = output
+
+    let playlistTitle = document.getElementById('playlist-title');
+    let playlistDescription = document.getElementById('playlist-description');
+    let playlistStatus = document.getElementById('playlist-status');
+
+    document.getElementById('create-playlist').onclick = create;
+
+    function create(){
+        const requestOptions = {
+            part: ['snippet,status'],
+            resource: {
+                snippet: {
+                    title: playlistTitle.value,
+                    description: playlistDescription.value,
+                    defaultLanguage: 'en'
+                },
+                status: {
+                    privacyStatus: playlistStatus.value
+                }
             }
         }
+    
+        const request = gapi.client.youtube.playlists.insert(requestOptions);
+
+        request.execute(res => {
+            console.log(res);
+        })
+
+        playlistStatus.value = '';
+        playlistDescription.value= '';
+        playlistTitle.value= '';
+
     }
-
-    const request = gapi.client.youtube.playlists.insert(requestOptions);
-
-    request.execute(res => {
-        console.log(res);
-    })
 }
