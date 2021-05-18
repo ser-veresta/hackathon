@@ -223,8 +223,9 @@ function createdPlaylist(sysGeneratedPlaylist){
     if(!flag){
         sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlist';
     }
-
-    sysGeneratedPlaylistContainer.innerHTML = output;
+    else{
+        sysGeneratedPlaylistContainer.innerHTML = output;
+    }
 }
 
 // To diplay the subscriptions 
