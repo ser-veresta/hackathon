@@ -254,7 +254,7 @@ function subscriptions(){
 
         subscribersContainer.innerHTML = output;
     })
-    .catch(err => subscribersContainer.innerHTML = 'err');
+    .catch(err => subscribersContainer.innerHTML = err);
 }
 
 // To display the activities
