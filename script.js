@@ -220,18 +220,21 @@ function activities(){
 
     request.execute(res => {
         const items = res.items;
-        console.log(res);
 
-        // let output = '<h4 class="center-align">Activities</h4>';
+        let output = '<h4 class="center-align">Activities</h4>';
 
-        // output += '<ul class="collection">';
+        output += `
+            <ul class="collection">
+                <li class="collection-item">Title  Type  Published At</li>
+        `;
 
-        // items.forEach(item => {
-        //     output += `<li class="collection-item">${item.snippet} </li>`
-        // });
 
-        // output += '</ul>';
+        items.forEach(item => {
+            output += `<li class="collection-item">${item.snippet.title} ${item.snippet.type} ${item.snippet.publishedAt}</li>`
+        });
 
-        // subscribersContainer.innerHTML = output;
+        output += '</ul>';
+
+        subscribersContainer.innerHTML = output;
     });
 }
