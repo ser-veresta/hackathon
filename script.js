@@ -100,6 +100,43 @@ function getChannel(channel){
             </a>
         `;
         showChannelInfo(output);
+
+        const playlistId = channel.contentDetails.relatedPlaylists.uploads;
+        requestVideoplaylist(playlistId);
     })
     .catch(err => alert('No Channel By That Name'));
+}
+
+//to show the videos in the channel 
+function requestVideoplaylist(playlistId){
+    const requestOptions = {
+        playlistId: playlistId,
+        part: 'snippet',
+        maxResults: 10
+    }
+
+    const request = gapi.client.youtube.playlistItems.list(requestOptions);
+
+    request.execute(res => {
+        const listItems = res.result.items;
+        if(listItems){
+            let output = '<h4 class="center-align">Latest Videos</h4>'
+
+            //loop through videos
+            listItems.forEach(item => {
+                const videoId = item.snippet.resourceId.videoId;
+
+                output += `
+                    <div class="col s3">
+                        <iframe width="100%" height="auto" src="https://youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                `;
+            });
+
+            videoContainer.innerHTML = output;
+        } 
+        else{
+            videoContainer.innerHTML = 'No Uploaded Videos'
+        }
+    })
 }
