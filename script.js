@@ -89,7 +89,6 @@ function getChannel(){
     let params = {
         part: 'snippet,contentDetails,statistics',
         mine: true
-        // forUsername: 'GoogleDevelopers'
     }; 
 
     gapi.client.youtube.channels.list(params)
@@ -121,14 +120,6 @@ function getChannel(){
         document.getElementById('activitie-btn').onclick = functionality;
         document.getElementById('uploaded-video-btn').onclick = functionality;
         document.getElementById('sys-generated-playlist-btn').onclick = functionality;
-
-        // const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
-        // requestUploadVideoplaylist(uploadPlaylistId);
-
-        // const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
-        // createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
-
-        // activities();
     })
     .catch(err => alert('No Channel By That Name'));
 }
@@ -210,7 +201,6 @@ function createdPlaylist(sysGeneratedPlaylist){
     sysGeneratedPlaylist.forEach(item => {
         if(item !== ""){
             flag = true;
-            console.log(`https://www.youtube.com/embed/videoseries?list=${item}`);
             output += `
                 <div class="col s3">
                     <iframe width="100%" height="auto" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -232,7 +222,6 @@ function createdPlaylist(sysGeneratedPlaylist){
 function subscriptions(){
     const requestOptions = {
         part: 'snippet',
-        // mine: true,
         channelId: channel.id,
         maxResults: 20
     };
@@ -260,7 +249,6 @@ function subscriptions(){
 function activities(){
     const requestOptions = {
         part: 'snippet',
-        // mine: true,
         channelId: channel.id,
         maxResults: 20
     };
