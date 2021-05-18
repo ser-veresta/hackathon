@@ -148,7 +148,7 @@ function requestUploadVideoplaylist(uploadPlaylistId){
         else{
             uploadedVideoContainer.innerHTML = 'No Uploaded Videos'
         }
-    })
+    });
 }
 
 // To show the created playlist in the channel
@@ -179,5 +179,15 @@ function createdPlaylist(sysGeneratedPlaylist){
 
 //topo diplay the subscriptions 
 function subscriptions(){
+    const requestOptions = {
+        part: 'snippet',
+        mine: true,
+        maxResults: 20
+    }
 
+    const request = gapi.client.youtube.subscriptions.list(requestOptions);
+
+    request.execute(res => {
+        console.log(res);
+    });
 }
