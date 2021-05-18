@@ -26,7 +26,8 @@ searchForm.addEventListener('submit', e => {
     let search = searchInput.value;
 
     fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${search}&key=${API_KEY}&limit=1&indent=True`)
-        .then(res => console.log(res.json()));
+        .then(res => res.json())
+        .then(data => console.log(data));
 })
 
 // Load the auth2 library
