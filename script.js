@@ -188,14 +188,15 @@ function subscriptions(){
     const request = gapi.client.youtube.subscriptions.list(requestOptions);
 
     request.execute(res => {
-        const items = res.items;
+        console.log(res)
+        // const items = res.items;
 
-        let output = '<h4 class="center-align">System Generated Playlists</h4>';
+        // let output = '<h4 class="center-align">System Generated Playlists</h4>';
 
-        output += '<ul class="collection">';
+        // output += '<ul class="collection">';
 
-        items.forEach(item => {
-            output += `<li class="collection-item">${item.snippet.title} </li>`
-        });
+        // items.forEach(item => {
+        //     output += `<li class="collection-item">${item.snippet.title} </li>`
+        // });
     });
 }
