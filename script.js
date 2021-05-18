@@ -15,6 +15,7 @@ const createPlaylistContainer = document.getElementById('create-playlist-contain
 const channelData = document.getElementById('channel-data');
 
 let channel;
+let playlistId;
 
 //form submit 
 // channelForm.addEventListener('submit', e => {
@@ -323,12 +324,14 @@ function createPlaylist(){
         const request = gapi.client.youtube.playlists.insert(requestOptions);
 
         request.execute(res => {
-            console.log(res);
+            playlistId = res.id;
         })
 
         playlistStatus.value = '';
         playlistDescription.value= '';
         playlistTitle.value= '';
+
+        console.log(playlistId);
 
     }
 }
