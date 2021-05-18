@@ -111,6 +111,7 @@ function getChannel(){
                 Visit Channel
             </a>
             <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
+            <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
         `;
         showChannelInfo(output);
 
@@ -122,8 +123,6 @@ function getChannel(){
         // const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
         // createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
 
-        // subscriptions();
-
         // activities();
     })
     .catch(err => alert('No Channel By That Name'));
@@ -132,6 +131,13 @@ function getChannel(){
 function functionality(){
     console.log(this.id);
     switch(this.id){
+        case "activitie-btn":   activities();
+                                uploadedVideoContainer.style.display = 'none'; 
+                                sysGeneratedPlaylistContainer.style.display = 'none';
+                                subscribersContainer.style.display = 'none';
+                                activitiesContainer.style.display = 'block';
+                                break;
+
         case "subscribe-btn":   subscriptions();
                                 uploadedVideoContainer.style.display = 'none'; 
                                 sysGeneratedPlaylistContainer.style.display = 'none';
@@ -242,7 +248,7 @@ function activities(){
     request.execute(res => {
         const items = res.items;
 
-        let output = '<h4 class="center-align">Activities</h4>';
+        let output = '<h4 class="center-align">User Activities</h4>';
 
         output += `
             <ul class="collection">
