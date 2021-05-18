@@ -120,7 +120,7 @@ function getChannel(channel = undefined){
         const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
         createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
     })
-    .catch(err => alert('No Channel By That Name'));
+    .catch(err => alert('No Channel By That Name' + err));
 }
 
 // To show the uploaded videos in the channel 
