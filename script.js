@@ -43,6 +43,8 @@ searchForm.addEventListener('submit', e => {
                   function(err) { console.error("Execute error", err); });
       }
       gapi.load("client");
+      loadClient();
+      execute();
 })
 
 // Load the auth2 library
