@@ -110,9 +110,11 @@ function getChannel(){
             <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">
                 Visit Channel
             </a>
-            <button class="btn grey darken-2" type="button" id="subscribe-btn" onclick="functionality()">Subscriptions</button> 
+            <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
         `;
         showChannelInfo(output);
+
+        document.getElementById('subscribe-btn').onclick = functionality;
 
         // const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
         // requestUploadVideoplaylist(uploadPlaylistId);
@@ -128,6 +130,7 @@ function getChannel(){
 }
 
 function functionality(){
+    console.log(this.id);
     switch(this.id){
         case "subscribe-btn":   subscriptions();
                                 uploadedVideoContainer.style.display = 'none'; 
