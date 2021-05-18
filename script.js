@@ -77,21 +77,11 @@ function showChannelInfo(data){
 }
 
 // Get channel from api 
-function getChannel(channel = undefined){
-    let params;
-
-    if(false){
-        params = {
-            part: 'snippet,contentDetails,statistics',
-            forUsername: channel
-        }; 
-    }
-    else{
-        params = {
-            part: 'snippet,contentDetails,statistics',
-            mine: true
-        }; 
-    }
+function getChannel(){
+    let params = {
+        part: 'snippet,contentDetails,statistics',
+        mine: true
+    };
 
     gapi.client.youtube.channels.list(params)
     .then(res => {
