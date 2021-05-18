@@ -142,7 +142,7 @@ function functionality(){
                                     activitiesContainer.style.display = 'none';
                                     break;
         
-        case "sys-generated-playlist-bt":   const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
+        case "sys-generated-playlist-btn":  const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
                                             createdPlaylist([syGeneratedPlaylist.favorites,syGeneratedPlaylist.likes]);
                                             uploadedVideoContainer.style.display = 'none'; 
                                             sysGeneratedPlaylistContainer.style.display = 'block';
