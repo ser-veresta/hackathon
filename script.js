@@ -116,6 +116,7 @@ function getChannel(){
         showChannelInfo(output);
 
         document.getElementById('subscribe-btn').onclick = functionality;
+        document.getElementById('activitie-btn').onclick = functionality;
 
         // const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
         // requestUploadVideoplaylist(uploadPlaylistId);
