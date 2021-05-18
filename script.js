@@ -104,6 +104,7 @@ function getChannel(){
             <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">
                 Visit Channel
             </a>
+            <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
         `;
         showChannelInfo(output);
 
