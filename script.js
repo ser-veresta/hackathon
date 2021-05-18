@@ -153,11 +153,11 @@ function requestUploadVideoplaylist(uploadPlaylistId){
 
 // To show the created playlist in the channel
 function createdPlaylist(sysGeneratedPlaylist){
-    if(sysGeneratedPlaylist){
-        let output = '<h4 class="center-align">System Generated Playlists</h4>'
+    let output = '<h4 class="center-align">System Generated Playlists</h4>'
 
-        //loop through videos
-        sysGeneratedPlaylist.forEach(item => {
+    //loop through videos
+    sysGeneratedPlaylist.forEach(item => {
+        if(item !== ""){
             console.log(`https://www.youtube.com/embed/videoseries?list=${item}`);
             output += `
                 <div class="col s3">
@@ -165,13 +165,10 @@ function createdPlaylist(sysGeneratedPlaylist){
                     </iframe>
                 </div>
             `;
-        });
+        }
+    });
 
-        sysGeneratedPlaylistContainer.innerHTML = output;
-    } 
-    else{
-        sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlists'
-    }
+    sysGeneratedPlaylistContainer.innerHTML = output;
 }
 
 //topo diplay the subscriptions 
