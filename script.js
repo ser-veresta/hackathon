@@ -80,7 +80,8 @@ function showChannelInfo(data){
 function getChannel(){
     let params = {
         part: 'snippet,contentDetails,statistics',
-        mine: true
+        // mine: true
+        forUsername: 'GoogleDevelopers'
     }; 
 
     gapi.client.youtube.channels.list(params)
@@ -109,6 +110,8 @@ function getChannel(){
 
         const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
         createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
+
+        subscriptions();
     })
     .catch(err => alert('No Channel By That Name'));
 }
@@ -169,4 +172,9 @@ function createdPlaylist(sysGeneratedPlaylist){
     else{
         sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlists'
     }
+}
+
+//topo diplay the subscriptions 
+function subscriptions(){
+
 }
