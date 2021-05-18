@@ -12,6 +12,7 @@ const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-pla
 const subscribersContainer = document.getElementById('subscribers-container');
 const activitiesContainer = document.getElementById('activities-container');
 const createPlaylistContainer = document.getElementById('create-playlist-container');
+const updatePlaylistContainer = document.getElementById('update-playlist-container');
 const channelData = document.getElementById('channel-data');
 
 let channel;
@@ -112,6 +113,7 @@ function getChannel(){
             <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
             <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
             <button class="btn grey darken-2" type="button" id="create-playlist-btn">Create Playlist</button> 
+            <button class="btn grey darken-2" type="button" id="update-playlist-btn">Update Playlist</button> 
         `;
         showChannelInfo(output);
 
@@ -120,6 +122,7 @@ function getChannel(){
         document.getElementById('uploaded-video-btn').onclick = functionality;
         document.getElementById('sys-generated-playlist-btn').onclick = functionality;
         document.getElementById('create-playlist-btn').onclick = functionality;
+        document.getElementById('update-playlist-btn').onclick = functionality;
     })
     .catch(err => alert('No Channel By That Name'));
 }
@@ -160,6 +163,14 @@ function functionality(){
                                 break;
 
         case "create-playlist-btn": createPlaylist();
+                                    uploadedVideoContainer.style.display = 'none'; 
+                                    sysGeneratedPlaylistContainer.style.display = 'none';
+                                    subscribersContainer.style.display = 'none';
+                                    activitiesContainer.style.display = 'none';
+                                    createPlaylistContainer.style.display = 'block';
+                                    break;
+
+        case "update-playlist-btn": updatePlaylist();
                                     uploadedVideoContainer.style.display = 'none'; 
                                     sysGeneratedPlaylistContainer.style.display = 'none';
                                     subscribersContainer.style.display = 'none';
@@ -294,7 +305,7 @@ function createPlaylist(){
         <input type="text" placeholder="Enter Playlist Title" id="playlist-title">
         <input type="text" placeholder="Enter Playlist Description" id="playlist-description">
         <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status">
-        <input type="text" placeholder="Playlist Id" id="playlist-id" readonly>
+        <input type="text" placeholder="Playlist Id (copy this for update)" id="playlist-id" readonly>
         <button class="btn grey darken-2" type="button" id="create-playlist">Create Playlist</button> 
     `;
 
@@ -335,5 +346,53 @@ function createPlaylist(){
 
         console.log(playlistId.value);
 
+    }
+}
+
+function updatePlaylist(){
+    let output = `
+        <h4 class="center-align">Update Playlist</h4>
+        <input type="text" placeholder="Enter Playlist Id" id="u-playlist-id">
+        <input type="text" placeholder="Enter Playlist Title" id="u-playlist-title">
+        <input type="text" placeholder="Enter Playlist Description" id="u-playlist-description">
+        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="u-playlist-status">
+        <button class="btn grey darken-2" type="button" id="update-playlist">Create Playlist</button> 
+    `;
+
+    createPlaylistContainer.innerHTML = output
+
+    let playlistTitle = document.getElementById('u-playlist-title');
+    let playlistDescription = document.getElementById('u-playlist-description');
+    let playlistStatus = document.getElementById('u-playlist-status');
+    let playlistId = document.getElementById('u-playlist-id');
+
+    document.getElementById('update-playlist').onclick = update;
+
+    function update(){
+        const requestOptions = {
+            part: ['snippet,status'],
+            id: playlistId.value,
+            resource: {
+                snippet: {
+                    title: playlistTitle.value,
+                    description: playlistDescription.value,
+                    defaultLanguage: 'en'
+                },
+                status: {
+                    privacyStatus: playlistStatus.value
+                }
+            }
+        }
+    
+        const request = gapi.client.youtube.playlists.update(requestOptions);
+
+        request.execute(res => {
+            console.log(res);
+        })
+
+        playlistStatus.value = '';
+        playlistDescription.value= '';
+        playlistTitle.value= '';
+        playlistId.value = '';
     }
 }
