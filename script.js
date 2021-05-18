@@ -26,7 +26,7 @@ searchForm.addEventListener('submit', e => {
     let search = searchInput.value;
 
     function loadClient() {
-        gapi.client.setApiKey("API_KEY");
+        gapi.client.setApiKey(API_KEY);
         return gapi.client.load("https://kgsearch.googleapis.com/$discovery/rest?version=v1")
             .then(function() { console.log("GAPI client loaded for API"); },
                   function(err) { console.error("Error loading GAPI client for API", err); });
