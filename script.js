@@ -16,7 +16,7 @@ const channelData = document.getElementById('channel-data');
 
 let channel;
 
-//form submit & change channel 
+//form submit 
 // channelForm.addEventListener('submit', e => {
 //     e.preventDefault();
 
