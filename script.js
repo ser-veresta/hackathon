@@ -8,6 +8,7 @@ const content = document.getElementById('content');
 const channelForm = document.getElementById('channel-form');
 const channelInput = document.getElementById('channel-input');
 const videoContainer = document.getElementById('video-container');
+const channelData = document.getElementById('channel-data');
 
 const defaultChannel = 'GoogleDevelopers';
 
@@ -60,6 +61,11 @@ function handleSignouotClick(){
     gapi.auth2.getAuthInstance().signOut();
 }
 
+// Display channel info
+function showChannelInfo(data){
+    channelData.innerHTML = data;
+}
+
 // Get channel from api 
 function getChannel(channel){
     gapi.client.youtube.channels.list({
@@ -68,6 +74,23 @@ function getChannel(channel){
     })
     .then(res => {
         console.log(res);
+        const channel = res.result.items[0];
+
+        const output = `
+            <ul class="collection">
+                <li class="collection-item">Title: ${channel.snippet.title}</li>
+                <li class="collection-item">ID: ${channel.id}</li>
+                <li class="collection-item">Subscribers: ${channel.statistics.subscriberCount}</li>
+                <li class="collection-item">Views: ${channel.statistics.viewCount}</li>
+                <li class="collection-item">Videos: ${channel.statistics.videoCount}</li>
+            </ul>
+            <p>${channel.snippet.description}</p>
+            <hr>
+            <a class="btn grey darken-2" target="_blank" href="https://youtube.com/${channel.snippet.customUrl}">
+                Visit Channel
+            </a>
+        `;
+        showChannelInfo(output);
     })
     .catch(err => alert('No Channel By That Name'));
 }
