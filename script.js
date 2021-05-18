@@ -114,6 +114,8 @@ function getChannel(){
         createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
 
         subscriptions();
+
+        activities();
     })
     .catch(err => alert('No Channel By That Name'));
 }
