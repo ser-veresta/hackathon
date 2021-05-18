@@ -1,3 +1,4 @@
+const API_KEY = 'AIzaSyA7I9pVEE5qJwEbvxTEHCpHQDEuePtj8uo';
 const CLIENT_ID = '756283618964-mu7c6q41e3sgkr95mt6egsukt0dj6h5m.apps.googleusercontent.com';
 const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'];
 const SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
@@ -5,8 +6,8 @@ const SCOPE = 'https://www.googleapis.com/auth/youtube.force-ssl';
 const authorizeButton = document.getElementById('authorize-button');
 const signoutButton = document.getElementById('signout-button');
 const content = document.getElementById('content');
-const channelForm = document.getElementById('channel-form');
-const channelInput = document.getElementById('channel-input');
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
 const uploadedVideoContainer = document.getElementById('uploaded-video-container');
 const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-playlist-container');
 const subscribersContainer = document.getElementById('subscribers-container');
@@ -18,14 +19,31 @@ const channelData = document.getElementById('channel-data');
 let channel;
 let tempId;
 
-//form submit 
-// channelForm.addEventListener('submit', e => {
-//     e.preventDefault();
+//search  
+searchForm.addEventListener('submit', e => {
+    e.preventDefault();
 
-//     let channel = channelInput.value;
+    let search = searchInput.value;
 
-//     getChannel(channel);
-// })
+    function loadClient() {
+        gapi.client.setApiKey("API_KEY");
+        return gapi.client.load("https://kgsearch.googleapis.com/$discovery/rest?version=v1")
+            .then(function() { console.log("GAPI client loaded for API"); },
+                  function(err) { console.error("Error loading GAPI client for API", err); });
+    }
+
+    loadClient();
+
+    const requestOptions = {
+        query: search
+    }
+
+    const request = gapi.client.kgsearch.entities.search(requestOptions);
+
+    request.execute(res => {
+        console.log(res);
+    });
+})
 
 // Load the auth2 library
 function handleClientLoad(){
