@@ -159,7 +159,7 @@ function functionality(){
                                 createPlaylistContainer.style.display = 'none';
                                 break;
 
-        case "subscribe-create-playlist-btn":   createPlaylist();
+        case "create-playlist-btn":   createPlaylist();
                                                 uploadedVideoContainer.style.display = 'none'; 
                                                 sysGeneratedPlaylistContainer.style.display = 'none';
                                                 subscribersContainer.style.display = 'none';
