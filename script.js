@@ -113,7 +113,7 @@ function getChannel(){
         const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
         createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
 
-        subscriptions();
+        // subscriptions();
 
         activities();
     })
