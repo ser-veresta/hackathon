@@ -253,7 +253,8 @@ function subscriptions(){
         output += '</ul>';
 
         subscribersContainer.innerHTML = output;
-    });
+    })
+    .catch(err => subscribersContainer.innerHTML = 'err');
 }
 
 // To display the activities
