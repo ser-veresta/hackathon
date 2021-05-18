@@ -30,6 +30,7 @@ searchForm.addEventListener('submit', e => {
         .then(res => res.json())
         .then(data => {
             tempTopicId = data.itemListElement[0].result['@id'];
+            tempTopicId = tempTopicId.slice(3);
             console.log(tempTopicId);
         });
 })
