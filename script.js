@@ -13,5 +13,3 @@ async function oauthSignIn(){
 }
 
 oauthSignIn();
-
-console.log('for');
