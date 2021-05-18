@@ -12,6 +12,15 @@ const channelData = document.getElementById('channel-data');
 
 const defaultChannel = 'GoogleDevelopers';
 
+//form submit & change channel 
+channelForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const channel = channelInput.value;
+
+    getChannel(channel);
+})
+
 // Load the auth2 library
 function handleClientLoad(){
     gapi.load('client:auth2', initClient); 
