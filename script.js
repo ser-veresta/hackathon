@@ -48,14 +48,16 @@ function updateSigninStatus(isSignedIn){
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
         content.style.display = 'block';
-        videoContainer.style.display = 'block';
+        uploadedVideoContainer.style.display = 'block';
+        sysGeneratedPlaylistContainer.style.display = 'block';
         getChannel();
     }
     else{
         authorizeButton.style.display = 'block';
         signoutButton.style.display = 'none';
         content.style.display = 'none';
-        videoContainer.style.display = 'none'; 
+        uploadedVideoContainer.style.display = 'none'; 
+        sysGeneratedPlaylistContainer.style.display = 'none';
     }
 }
 
