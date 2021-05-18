@@ -136,18 +136,18 @@ function getChannel(){
 function functionality(){
     switch(this.id){
         case "uploaded-video-btn":  requestUploadVideoplaylist(channel.contentDetails.relatedPlaylists.uploads);
-                                    uploadedVideoContainer.style.display = 'none'; 
+                                    uploadedVideoContainer.style.display = 'block'; 
                                     sysGeneratedPlaylistContainer.style.display = 'none';
                                     subscribersContainer.style.display = 'none';
-                                    activitiesContainer.style.display = 'block';
+                                    activitiesContainer.style.display = 'none';
                                     break;
         
         case "sys-generated-playlist-bt":   const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
                                             createdPlaylist([syGeneratedPlaylist.favorites,syGeneratedPlaylist.likes]);
                                             uploadedVideoContainer.style.display = 'none'; 
-                                            sysGeneratedPlaylistContainer.style.display = 'none';
+                                            sysGeneratedPlaylistContainer.style.display = 'block';
                                             subscribersContainer.style.display = 'none';
-                                            activitiesContainer.style.display = 'block';
+                                            activitiesContainer.style.display = 'none';
                                             break;
 
         case "activitie-btn":   activities();
