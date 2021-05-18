@@ -16,6 +16,7 @@ const updatePlaylistContainer = document.getElementById('update-playlist-contain
 const channelData = document.getElementById('channel-data');
 
 let channel;
+let tempId;
 
 //form submit 
 // channelForm.addEventListener('submit', e => {
@@ -338,14 +339,12 @@ function createPlaylist(){
         request.execute(res => {
             console.log(res);
             playlistId.value = res.id;
+            tempId = playlistId.value;
         })
 
         playlistStatus.value = '';
         playlistDescription.value= '';
         playlistTitle.value= '';
-
-        console.log(playlistId.value);
-
     }
 }
 
@@ -365,6 +364,8 @@ function updatePlaylist(){
     let playlistDescription = document.getElementById('u-playlist-description');
     let playlistStatus = document.getElementById('u-playlist-status');
     let playlistId = document.getElementById('u-playlist-id');
+
+    playlistId.value = tempId;
 
     document.getElementById('update-playlist').onclick = update;
 
