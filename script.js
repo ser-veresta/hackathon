@@ -355,7 +355,7 @@ function updatePlaylist(){
         <input type="text" placeholder="Enter Playlist Title" id="u-playlist-title">
         <input type="text" placeholder="Enter Playlist Description" id="u-playlist-description">
         <input type="text" placeholder="Enter Playlist Status ( private / public )" id="u-playlist-status">
-        <button class="btn grey darken-2" type="button" id="update-playlist">Create Playlist</button> 
+        <button class="btn grey darken-2" type="button" id="update-playlist">Update Playlist</button> 
     `;
 
     createPlaylistContainer.innerHTML = output
@@ -372,8 +372,8 @@ function updatePlaylist(){
     function update(){
         const requestOptions = {
             part: ['snippet,status'],
-            id: playlistId.value,
             resource: {
+                id: playlistId.value,
                 snippet: {
                     title: playlistTitle.value,
                     description: playlistDescription.value,
