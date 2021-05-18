@@ -18,6 +18,7 @@ const channelData = document.getElementById('channel-data');
 
 let channel;
 let tempId;
+let tempTopicId;
 
 //search  
 searchForm.addEventListener('submit', e => {
@@ -27,7 +28,10 @@ searchForm.addEventListener('submit', e => {
 
     fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${search}&key=${API_KEY}&limit=1&indent=True`)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+            tempTopicId = data.itemListElement[0].result['@id'];
+            console.log(tempTopicId);
+        });
 })
 
 // Load the auth2 library
