@@ -159,13 +159,13 @@ function functionality(){
                                 createPlaylistContainer.style.display = 'none';
                                 break;
 
-        case "create-playlist-btn":   createPlaylist();
-                                                uploadedVideoContainer.style.display = 'none'; 
-                                                sysGeneratedPlaylistContainer.style.display = 'none';
-                                                subscribersContainer.style.display = 'none';
-                                                activitiesContainer.style.display = 'none';
-                                                createPlaylistContainer.style.display = 'block';
-                                                break;
+        case "create-playlist-btn": createPlaylist();
+                                    uploadedVideoContainer.style.display = 'none'; 
+                                    sysGeneratedPlaylistContainer.style.display = 'none';
+                                    subscribersContainer.style.display = 'none';
+                                    activitiesContainer.style.display = 'none';
+                                    createPlaylistContainer.style.display = 'block';
+                                    break;
     }
 }
 
