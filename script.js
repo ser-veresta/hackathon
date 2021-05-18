@@ -11,6 +11,7 @@ const uploadedVideoContainer = document.getElementById('uploaded-video-container
 const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-playlist-container');
 const subscribersContainer = document.getElementById('subscribers-container');
 const activitiesContainer = document.getElementById('activities-container');
+const createPlaylistContainer = document.getElementById('create-playlist-container');
 const channelData = document.getElementById('channel-data');
 
 let channel;
@@ -52,10 +53,6 @@ function updateSigninStatus(isSignedIn){
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
         content.style.display = 'block';
-        // uploadedVideoContainer.style.display = 'block';
-        // sysGeneratedPlaylistContainer.style.display = 'block';
-        // subscribersContainer.style.display = 'block';
-        // activitiesContainer.style.display = 'block';
         getChannel();
     }
     else{
@@ -66,6 +63,7 @@ function updateSigninStatus(isSignedIn){
         sysGeneratedPlaylistContainer.style.display = 'none';
         subscribersContainer.style.display = 'none';
         activitiesContainer.style.display = 'none';
+        createPlaylistContainer.style.display = 'none';
     }
 }
 
@@ -113,6 +111,7 @@ function getChannel(){
             <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
             <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
             <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
+            <button class="btn grey darken-2" type="button" id="create-playlist-btn">Create Playlist</button> 
         `;
         showChannelInfo(output);
 
@@ -120,25 +119,28 @@ function getChannel(){
         document.getElementById('activitie-btn').onclick = functionality;
         document.getElementById('uploaded-video-btn').onclick = functionality;
         document.getElementById('sys-generated-playlist-btn').onclick = functionality;
+        document.getElementById('create-playlist-btn').onclick = functionality;
     })
     .catch(err => alert('No Channel By That Name'));
 }
 
 function functionality(){
     switch(this.id){
-        case "uploaded-video-btn":  requestUploadVideoplaylist(channel.contentDetails.relatedPlaylists.uploads);
+        case "uploaded-video-btn":  requestUploadedVideos(channel.contentDetails.relatedPlaylists.uploads);
                                     uploadedVideoContainer.style.display = 'block'; 
                                     sysGeneratedPlaylistContainer.style.display = 'none';
                                     subscribersContainer.style.display = 'none';
                                     activitiesContainer.style.display = 'none';
+                                    createPlaylistContainer.style.display = 'none';
                                     break;
         
         case "sys-generated-playlist-btn":  const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
-                                            createdPlaylist([syGeneratedPlaylist.favorites,syGeneratedPlaylist.likes]);
+                                            requestSystemGeneratedPlaylist([syGeneratedPlaylist.favorites,syGeneratedPlaylist.likes]);
                                             uploadedVideoContainer.style.display = 'none'; 
                                             sysGeneratedPlaylistContainer.style.display = 'block';
                                             subscribersContainer.style.display = 'none';
                                             activitiesContainer.style.display = 'none';
+                                            createPlaylistContainer.style.display = 'none';
                                             break;
 
         case "activitie-btn":   activities();
@@ -146,6 +148,7 @@ function functionality(){
                                 sysGeneratedPlaylistContainer.style.display = 'none';
                                 subscribersContainer.style.display = 'none';
                                 activitiesContainer.style.display = 'block';
+                                createPlaylistContainer.style.display = 'none';
                                 break;
 
         case "subscribe-btn":   subscriptions();
@@ -153,12 +156,21 @@ function functionality(){
                                 sysGeneratedPlaylistContainer.style.display = 'none';
                                 subscribersContainer.style.display = 'block';
                                 activitiesContainer.style.display = 'none';
+                                createPlaylistContainer.style.display = 'none';
                                 break;
+
+        case "subscribe-create-playlist-btn":   createPlaylist();
+                                                uploadedVideoContainer.style.display = 'none'; 
+                                                sysGeneratedPlaylistContainer.style.display = 'none';
+                                                subscribersContainer.style.display = 'none';
+                                                activitiesContainer.style.display = 'none';
+                                                createPlaylistContainer.style.display = 'block';
+                                                break;
     }
 }
 
 // To show the uploaded videos in the channel 
-function requestUploadVideoplaylist(uploadPlaylistId){
+function requestUploadedVideos(uploadPlaylistId){
     const requestOptions = {
         playlistId: uploadPlaylistId,
         part: 'snippet',
@@ -193,7 +205,7 @@ function requestUploadVideoplaylist(uploadPlaylistId){
 }
 
 // To show the created playlist in the channel
-function createdPlaylist(sysGeneratedPlaylist){
+function requestSystemGeneratedPlaylist(sysGeneratedPlaylist){
     let output = '<h4 class="center-align">System Generated Playlists</h4>'
     let flag = false;
 
@@ -274,4 +286,26 @@ function activities(){
 
         activitiesContainer.innerHTML = output;
     });
+}
+
+function createPlaylist(){
+    const requestOptions = {
+        part: 'snippet',
+        resource: {
+            snippet: {
+                title: 'Sample playlist created via API',
+                description: 'This is a sample playlist description.',
+                defaultLanguage: 'en'
+            },
+            status: {
+                privacyStatus: 'private'
+            }
+        }
+    }
+
+    const request = gapi.client.youtube.playlists.insert(requestOptions);
+
+    request.execute(res => {
+        console.log(res);
+    })
 }
