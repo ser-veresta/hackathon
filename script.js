@@ -129,7 +129,6 @@ function getChannel(){
 }
 
 function functionality(){
-    console.log(this.id);
     switch(this.id){
         case "activitie-btn":   activities();
                                 uploadedVideoContainer.style.display = 'none'; 
