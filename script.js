@@ -294,7 +294,7 @@ function createPlaylist(){
         <input type="text" placeholder="Enter Playlist Title" id="playlist-title">
         <input type="text" placeholder="Enter Playlist Description" id="playlist-description">
         <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status">
-        <input type="text" id="playlist-id" readonly>
+        <input type="text" placeholder="Playlist Id" id="playlist-id" readonly>
         <button class="btn grey darken-2" type="button" id="create-playlist">Create Playlist</button> 
     `;
 
@@ -333,7 +333,7 @@ function createPlaylist(){
         playlistDescription.value= '';
         playlistTitle.value= '';
 
-        console.log(playlistId);
+        console.log(playlistId.value);
 
     }
 }
