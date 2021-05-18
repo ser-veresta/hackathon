@@ -290,7 +290,7 @@ function activities(){
 
 function createPlaylist(){
     const requestOptions = {
-        part: 'snippet',
+        part: ['snippet,status'],
         resource: {
             snippet: {
                 title: 'Sample playlist created via API',
