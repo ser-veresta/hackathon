@@ -221,9 +221,6 @@ function createdPlaylist(sysGeneratedPlaylist){
     });
 
     if(!flag){
-        sysGeneratedPlaylistContainer.style.display = 'none';
-    }
-    else{
         sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlist';
     }
 
