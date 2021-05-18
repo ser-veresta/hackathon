@@ -7,7 +7,8 @@ const signoutButton = document.getElementById('signout-button');
 const content = document.getElementById('content');
 const channelForm = document.getElementById('channel-form');
 const channelInput = document.getElementById('channel-input');
-const videoContainer = document.getElementById('video-container');
+const uploadedVideoContainer = document.getElementById('uploaded-video-container');
+const sysGeneratedPlaylistContainer = document.getElementById('sys-generated-playlist-container');
 const channelData = document.getElementById('channel-data');
 
 //form submit & change channel 
@@ -77,7 +78,7 @@ function showChannelInfo(data){
 function getChannel(channel = undefined){
     let params;
 
-    if(channel){
+    if(false){
         params = {
             part: 'snippet,contentDetails,statistics',
             forUsername: channel
@@ -111,16 +112,19 @@ function getChannel(channel = undefined){
         `;
         showChannelInfo(output);
 
-        const playlistId = channel.contentDetails.relatedPlaylists.uploads;
-        requestVideoplaylist(playlistId);
+        const uploadPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
+        requestUploadVideoplaylist(uploadPlaylistId);
+
+        const sysGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
+        createdPlaylist([sysGeneratedPlaylist.favorites,sysGeneratedPlaylist.likes]);
     })
     .catch(err => alert('No Channel By That Name'));
 }
 
-//to show the videos in the channel 
-function requestVideoplaylist(playlistId){
+// To show the uploaded videos in the channel 
+function requestUploadVideoplaylist(uploadPlaylistId){
     const requestOptions = {
-        playlistId: playlistId,
+        playlistId: uploadPlaylistId,
         part: 'snippet',
         maxResults: 10
     }
@@ -130,7 +134,7 @@ function requestVideoplaylist(playlistId){
     request.execute(res => {
         const listItems = res.result.items;
         if(listItems){
-            let output = '<h4 class="center-align">Latest Videos</h4>'
+            let output = '<h4 class="center-align">Uploaded Videos</h4>'
 
             //loop through videos
             listItems.forEach(item => {
@@ -138,15 +142,38 @@ function requestVideoplaylist(playlistId){
 
                 output += `
                     <div class="col s3">
-                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
                     </div>
                 `;
             });
 
-            videoContainer.innerHTML = output;
+            uploadedVideoContainer.innerHTML = output;
         } 
         else{
-            videoContainer.innerHTML = 'No Uploaded Videos'
+            uploadedVideoContainer.innerHTML = 'No Uploaded Videos'
         }
     })
+}
+
+// To show the created playlist in the channel
+function createdPlaylist(sysGeneratedPlaylist){
+    if(sysGeneratedPlaylist){
+        let output = '<h4 class="center-align">System Generated Playlists</h4>'
+
+        //loop through videos
+        sysGeneratedPlaylist.forEach(item => {
+            output += `
+                <div class="col s3">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                </div>
+            `;
+        });
+
+        sysGeneratedPlaylistContainer.innerHTML = output;
+    } 
+    else{
+        sysGeneratedPlaylistContainer.innerHTML = 'No System Generated Playlists'
+    }
 }
