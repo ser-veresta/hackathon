@@ -31,18 +31,18 @@ searchForm.addEventListener('submit', e => {
             .then(function() { console.log("GAPI client loaded for API"); },
                   function(err) { console.error("Error loading GAPI client for API", err); });
     }
-
-    loadClient();
-
-    const requestOptions = {
-        query: search
-    }
-
-    const request = gapi.client.kgsearch.entities.search(requestOptions);
-
-    request.execute(res => {
-        console.log(res);
-    });
+    
+    function execute() {
+        return gapi.client.kgsearch.entities.search({
+          "query": search
+        })
+            .then(function(response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Response", response);
+                  },
+                  function(err) { console.error("Execute error", err); });
+      }
+      gapi.load("client");
 })
 
 // Load the auth2 library
