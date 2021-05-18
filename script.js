@@ -154,10 +154,12 @@ function requestUploadVideoplaylist(uploadPlaylistId){
 // To show the created playlist in the channel
 function createdPlaylist(sysGeneratedPlaylist){
     let output = '<h4 class="center-align">System Generated Playlists</h4>'
+    let flag = false;
 
     //loop through videos
     sysGeneratedPlaylist.forEach(item => {
         if(item !== ""){
+            flag = true;
             console.log(`https://www.youtube.com/embed/videoseries?list=${item}`);
             output += `
                 <div class="col s3">
@@ -167,6 +169,10 @@ function createdPlaylist(sysGeneratedPlaylist){
             `;
         }
     });
+
+    if(!flag){
+        sysGeneratedPlaylistContainer.style.display = 'none';
+    }
 
     sysGeneratedPlaylistContainer.innerHTML = output;
 }
