@@ -434,7 +434,8 @@ function searchfunctionality(id){
     const requestOptions = {
         part: 'snippet',
         maxResults: 20,
-        topicId: id
+        topicId: id,
+        type: 'video'
     }
 
     const request = gapi.client.youtube.search.list(requestOptions);
