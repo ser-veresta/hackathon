@@ -317,6 +317,7 @@ function activities(){
 
         items.forEach(item => {
             output += `
+            <br>
             <div class="row">
                 <div class="col s4">${item.snippet.title}</div>
                 <div class="col s4">${item.snippet.type}</div>
