@@ -325,8 +325,6 @@ function activities(){
             `;
         });
 
-        output += '</ul>';
-
         activitiesContainer.innerHTML = output;
     });
 }
