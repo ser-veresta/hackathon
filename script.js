@@ -423,6 +423,8 @@ function updatePlaylist(){
 }
 
 function searchfunctionality(id){
+    let count = 0;
+
     uploadedVideoContainer.style.display = 'none'; 
     sysGeneratedPlaylistContainer.style.display = 'none';
     subscribersContainer.style.display = 'none';
@@ -449,6 +451,10 @@ function searchfunctionality(id){
             listItems.forEach(item => {
                 const videoId = item.id.videoId;
 
+                if(count === 20){
+                    break;
+                }
+
                 if(item.id.kind.includes('video')){
                     output += `
                     <div class="col s12">
@@ -457,6 +463,8 @@ function searchfunctionality(id){
                         </iframe>
                     </div>
                 `;
+
+                    count++;
                 }
             });
 
