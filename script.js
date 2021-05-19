@@ -118,9 +118,11 @@ function getChannel(){
             <hr>
             <div class="row">
                 <div class="col s4">
-                    <a class="btn grey darken-2" target="_blank" href="https://youtube.com/channel/${channel.id}">
-                    Visit Channel
-                    </a>
+                    <button class="btn grey darken-2">
+                        <a target="_blank" href="https://youtube.com/channel/${channel.id}">
+                        Visit Channel
+                        </a>
+                    </button>
                 </div>
                 <div class="col s4">
                     <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
