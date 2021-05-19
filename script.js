@@ -224,7 +224,7 @@ function requestUploadedVideos(uploadPlaylistId){
 
                 output += `
                     <div class="col s6">
-                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        <iframe width="100%" height="600px" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
                 `;
@@ -248,8 +248,8 @@ function requestSystemGeneratedPlaylist(sysGeneratedPlaylist){
         if(item !== ""){
             flag = true;
             output += `
-                <div class="col s3">
-                    <iframe width="100%" height="auto" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                <div class="col s6">
+                    <iframe width="100%" height="600px" src="https://www.youtube.com/embed/videoseries?list=${item}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                     </iframe>
                 </div>
             `;
