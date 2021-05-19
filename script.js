@@ -308,9 +308,9 @@ function activities(){
 
         output += `
         <div class="row">
-            <div class="col s4">Title</div>
-            <div class="col s4">Type Of Activity</div>
-            <div class="col s4">Published At</div>
+            <div class="col s4"><h5>Title</h5></div>
+            <div class="col s4"><h5>Type Of Activity</h5></div>
+            <div class="col s4"><h5>Published At</h5></div>
         </div>
         `;
 
