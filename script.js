@@ -14,6 +14,7 @@ const subscribersContainer = document.getElementById('subscribers-container');
 const activitiesContainer = document.getElementById('activities-container');
 const createPlaylistContainer = document.getElementById('create-playlist-container');
 const updatePlaylistContainer = document.getElementById('update-playlist-container');
+const searchContainer = document.getElementById('search-container');
 const channelData = document.getElementById('channel-data');
 
 let channel;
@@ -32,6 +33,7 @@ searchForm.addEventListener('submit', e => {
             tempTopicId = data.itemListElement[0].result['@id'];
             tempTopicId = tempTopicId.slice(3);
             console.log(tempTopicId);
+            searchfunctionality(tempTopicId);
         });
 })
 
@@ -74,6 +76,8 @@ function updateSigninStatus(isSignedIn){
         subscribersContainer.style.display = 'none';
         activitiesContainer.style.display = 'none';
         createPlaylistContainer.style.display = 'none';
+        updatePlaylistContainer.style.display = 'none';
+        searchContainer.style.display = 'none';
     }
 }
 
@@ -144,6 +148,8 @@ function functionality(){
                                     subscribersContainer.style.display = 'none';
                                     activitiesContainer.style.display = 'none';
                                     createPlaylistContainer.style.display = 'none';
+                                    updatePlaylistContainer.style.display = 'none';
+                                    searchContainer.style.display = 'none';
                                     break;
         
         case "sys-generated-playlist-btn":  const syGeneratedPlaylist = channel.contentDetails.relatedPlaylists;
@@ -153,6 +159,8 @@ function functionality(){
                                             subscribersContainer.style.display = 'none';
                                             activitiesContainer.style.display = 'none';
                                             createPlaylistContainer.style.display = 'none';
+                                            updatePlaylistContainer.style.display = 'none';
+                                            searchContainer.style.display = 'none';
                                             break;
 
         case "activitie-btn":   activities();
@@ -161,6 +169,8 @@ function functionality(){
                                 subscribersContainer.style.display = 'none';
                                 activitiesContainer.style.display = 'block';
                                 createPlaylistContainer.style.display = 'none';
+                                updatePlaylistContainer.style.display = 'none';
+                                searchContainer.style.display = 'none';
                                 break;
 
         case "subscribe-btn":   subscriptions();
@@ -169,6 +179,8 @@ function functionality(){
                                 subscribersContainer.style.display = 'block';
                                 activitiesContainer.style.display = 'none';
                                 createPlaylistContainer.style.display = 'none';
+                                updatePlaylistContainer.style.display = 'none';
+                                searchContainer.style.display = 'none';
                                 break;
 
         case "create-playlist-btn": createPlaylist();
@@ -177,6 +189,8 @@ function functionality(){
                                     subscribersContainer.style.display = 'none';
                                     activitiesContainer.style.display = 'none';
                                     createPlaylistContainer.style.display = 'block';
+                                    updatePlaylistContainer.style.display = 'none';
+                                    searchContainer.style.display = 'none';
                                     break;
 
         case "update-playlist-btn": updatePlaylist();
@@ -184,7 +198,9 @@ function functionality(){
                                     sysGeneratedPlaylistContainer.style.display = 'none';
                                     subscribersContainer.style.display = 'none';
                                     activitiesContainer.style.display = 'none';
-                                    createPlaylistContainer.style.display = 'block';
+                                    createPlaylistContainer.style.display = 'none';
+                                    updatePlaylistContainer.style.display = 'block';
+                                    searchContainer.style.display = 'none';
                                     break;
     }
 }
@@ -404,4 +420,48 @@ function updatePlaylist(){
         playlistTitle.value= '';
         playlistId.value = '';
     }
+}
+
+function searchfunctionality(id){
+    uploadedVideoContainer.style.display = 'none'; 
+    sysGeneratedPlaylistContainer.style.display = 'none';
+    subscribersContainer.style.display = 'none';
+    activitiesContainer.style.display = 'none';
+    createPlaylistContainer.style.display = 'none';
+    updatePlaylistContainer.style.display = 'none';
+    searchContainer.style.display = 'block';
+
+    const requestOptions = {
+        part: 'snippet',
+        maxResults: 20,
+        topicId: id
+    }
+
+    const request = gapi.client.youtube.search.list(requestOptions);
+
+    request.execute(res => {
+        const listItems = res.items;
+        if(listItems){
+            let output = '<h4 class="center-align">Uploaded Videos</h4>'
+
+            //loop through videos
+            listItems.forEach(item => {
+                const videoId = item.id.videoId;
+
+                if(item.id.kind.includes('video')){
+                    output += `
+                    <div class="col s4">
+                        <iframe width="100%" height="auto" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+                }
+            });
+
+            searchContainer.innerHTML = output;
+        } 
+        else{
+            searchContainer.innerHTML = 'No resultls for given keyword'
+        }
+    })
 }
