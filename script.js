@@ -32,7 +32,6 @@ searchForm.addEventListener('submit', e => {
         .then(data => {
             tempTopicId = data.itemListElement[0].result['@id'];
             tempTopicId = tempTopicId.slice(3);
-            console.log(tempTopicId);
             searchfunctionality(tempTopicId);
         });
 })
@@ -105,7 +104,6 @@ function getChannel(){
 
     gapi.client.youtube.channels.list(params)
     .then(res => {
-        console.log(res);
         channel = res.result.items[0];
 
         const output = `
