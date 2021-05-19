@@ -445,7 +445,7 @@ function searchfunctionality(id){
     request.execute(res => {
         const listItems = res.items;
         if(listItems){
-            let output = '<h4 class="center-align">Uploaded Videos</h4>'
+            let output = '<h4 class="center-align">Search Results</h4>'
 
             //loop through videos
             listItems.forEach(item => {
