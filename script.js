@@ -307,7 +307,7 @@ function activities(){
         let output = '<h4 class="center-align">User Activities</h4>';
 
         output += `
-        <div class="row">
+        <div class="">
             <div class="col s4">Title</div>
             <div class="col s4">Type Of Activity</di>
             <div class="col s4">Published At</div>
