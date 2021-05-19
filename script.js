@@ -352,9 +352,9 @@ function activities(){
 function createPlaylist(){
     let output = `
         <h4 class="center-align">Create Playlist</h4>
-        <input type="text" placeholder="Enter Playlist Title" id="playlist-title">
-        <input type="text" placeholder="Enter Playlist Description" id="playlist-description">
-        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status">
+        <input type="text" placeholder="Enter Playlist Title" id="playlist-title" autocomplete="off">
+        <input type="text" placeholder="Enter Playlist Description" id="playlist-description" autocomplete="off">
+        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="playlist-status" autocomplete="off">
         <input type="text" placeholder="Playlist Id (copy this for update)" id="playlist-id" readonly>
         <button class="btn grey darken-2" type="button" id="create-playlist">Create Playlist</button> 
     `;
@@ -401,10 +401,10 @@ function createPlaylist(){
 function updatePlaylist(){
     let output = `
         <h4 class="center-align">Update Playlist</h4>
-        <input type="text" placeholder="Enter Playlist Id" id="u-playlist-id">
-        <input type="text" placeholder="Enter Playlist Title" id="u-playlist-title">
-        <input type="text" placeholder="Enter Playlist Description" id="u-playlist-description">
-        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="u-playlist-status">
+        <input type="text" placeholder="Enter Playlist Id" id="u-playlist-id" autocomplete="off">
+        <input type="text" placeholder="Enter Playlist Title" id="u-playlist-title" autocomplete="off">
+        <input type="text" placeholder="Enter Playlist Description" id="u-playlist-description" autocomplete="off">
+        <input type="text" placeholder="Enter Playlist Status ( private / public )" id="u-playlist-status" autocomplete="off">
         <button class="btn grey darken-2" type="button" id="update-playlist">Update Playlist</button> 
     `;
 
