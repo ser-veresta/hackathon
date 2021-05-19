@@ -452,7 +452,7 @@ function searchfunctionality(id){
                 const videoId = item.id.videoId;
 
                 if(count === 10){
-                    break;
+                    return;
                 }
 
                 if(item.id.kind.includes('video')){
