@@ -121,11 +121,24 @@ function getChannel(){
                     <a class="btn grey darken-2" target="_blank" href="https://youtube.com/channel/${channel.id}">
                     Visit Channel
                     </a>
+                </div>
+                <div class="col s4">
                     <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
-                    <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
+                </div>
+                <div class="col s4">
+                    <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button>
+                </div>
+                <div class="col s4"> 
                     <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
-                    <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
+                </div>
+                <div class="col s4">
+                    <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist
+                    </button>
+                </div>
+                <div class="col s4"> 
                     <button class="btn grey darken-2" type="button" id="create-playlist-btn">Create Playlist</button> 
+                </div>
+                <div class="col s4">
                     <button class="btn grey darken-2" type="button" id="update-playlist-btn">Update Playlist</button> 
                 </div>
             </div>
