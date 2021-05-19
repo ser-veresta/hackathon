@@ -21,7 +21,7 @@ let channel;
 let tempId;
 let tempTopicId;
 
-//search  
+// Search form function  
 searchForm.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -138,6 +138,7 @@ function getChannel(){
     .catch(err => alert('No Channel By That Name'));
 }
 
+// Channel UI functionality function
 function functionality(){
     switch(this.id){
         case "uploaded-video-btn":  requestUploadedVideos(channel.contentDetails.relatedPlaylists.uploads);
@@ -330,6 +331,7 @@ function activities(){
     });
 }
 
+// To create a playlist
 function createPlaylist(){
     let output = `
         <h4 class="center-align">Create Playlist</h4>
@@ -378,6 +380,7 @@ function createPlaylist(){
     }
 }
 
+// To update a playlist
 function updatePlaylist(){
     let output = `
         <h4 class="center-align">Update Playlist</h4>
@@ -428,6 +431,7 @@ function updatePlaylist(){
     }
 }
 
+// To search for videos usinig topic-based searching
 function searchfunctionality(id){
     let count = 0;
 
