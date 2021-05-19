@@ -307,20 +307,20 @@ function activities(){
         let output = '<h4 class="center-align">User Activities</h4>';
 
         output += `
-        <div class="col s4">
-            <p>Title</p>
-            <p>Type Of Activity</p>
-            <p>Published At</p>
+        <div class="row">
+            <div class="col s4">Title</div>
+            <div class="col s4">Type Of Activity</di>
+            <div class="col s4">Published At</div>
         </div>
         `;
 
 
         items.forEach(item => {
             output += `
-            <div class="col s4">
-                <p>${item.snippet.title}</p>
-                <p>T${item.snippet.type}</p>
-                <p>${item.snippet.publishedAt}</p>
+            <div class="row">
+                <div class="col s4">${item.snippet.title}</div>
+                <div class="col s4">${item.snippet.type}</div>
+                <div class="col s4">${item.snippet.publishedAt}</div>
             </div>
             `;
         });
