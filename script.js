@@ -408,14 +408,16 @@ function updatePlaylist(){
         <button class="btn grey darken-2" type="button" id="update-playlist">Update Playlist</button> 
     `;
 
-    createPlaylistContainer.innerHTML = output
+    updatePlaylistContainer.innerHTML = output;
 
     let playlistTitle = document.getElementById('u-playlist-title');
     let playlistDescription = document.getElementById('u-playlist-description');
     let playlistStatus = document.getElementById('u-playlist-status');
     let playlistId = document.getElementById('u-playlist-id');
 
-    playlistId.value = tempId;
+    if(tempId){
+        playlistId.value = tempId;
+    }
 
     document.getElementById('update-playlist').onclick = update;
 
