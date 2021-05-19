@@ -116,15 +116,19 @@ function getChannel(){
             </ul>
             <p>${channel.snippet.description}</p>
             <hr>
-            <a class="btn grey darken-2" target="_blank" href="https://youtube.com/channel/${channel.id}">
-                Visit Channel
-            </a>
-            <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
-            <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
-            <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
-            <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
-            <button class="btn grey darken-2" type="button" id="create-playlist-btn">Create Playlist</button> 
-            <button class="btn grey darken-2" type="button" id="update-playlist-btn">Update Playlist</button> 
+            <div class="row">
+                <div class="col s4">
+                    <a class="btn grey darken-2" target="_blank" href="https://youtube.com/channel/${channel.id}">
+                    Visit Channel
+                    </a>
+                    <button class="btn grey darken-2" type="button" id="subscribe-btn">Subscriptions</button> 
+                    <button class="btn grey darken-2" type="button" id="activitie-btn">User Activities</button> 
+                    <button class="btn grey darken-2" type="button" id="uploaded-video-btn">Uploaded Videos</button> 
+                    <button class="btn grey darken-2" type="button" id="sys-generated-playlist-btn">System Generated Playlist</button> 
+                    <button class="btn grey darken-2" type="button" id="create-playlist-btn">Create Playlist</button> 
+                    <button class="btn grey darken-2" type="button" id="update-playlist-btn">Update Playlist</button> 
+                </div>
+            </div>
         `;
         showChannelInfo(output);
 
