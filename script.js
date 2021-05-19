@@ -458,7 +458,7 @@ function searchfunctionality(id){
                 if(item.id.kind.includes('video')){
                     output += `
                     <div class="col s12">
-                        <h6>${item.snippet.title}</h6>
+                        <h5>${item.snippet.title}</h5>
                         <iframe width="100%" height="600px" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
                     </div>
